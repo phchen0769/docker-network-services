@@ -1,0 +1,5 @@
+# sshd_config
+PermitRootLogin no
+PasswordAuthentication yes
+PubkeyAuthentication yes
+StrictModes no

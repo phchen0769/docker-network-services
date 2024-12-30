@@ -1,0 +1,14 @@
+{
+	"workbench.colorTheme": "Copilot Theme",
+	"vscode_custom_css.imports": [
+		"https://gist.githubusercontent.com/Ynng/3275eb9cb2b5816554877e5518417f44/raw/1447d34712a59a1ac48ae1ce6da18c5460ea7cea/custom.css"
+	],
+	"editor.fontSize": 20,
+	"editor.formatOnSave": true, //保存时自动格式化
+	"eslint.enable": true, //开启eslint检查
+	"editor.guides.bracketPairs": true,
+	"editor.codeActionsOnSave": {
+		"source.fixAll": "explicit"
+	},
+	"window.zoomLevel": 1
+}
