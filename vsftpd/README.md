@@ -55,7 +55,7 @@ Before you begin, ensure you have the following installed:
 
     ```bash
     docker build -t custom-ftp-server .
-    docker run -d -p 2222:22 -p 20-22:20-22 -p 21100-21110:21100-21110 -p 990:990 custom-ftp-server
+    docker run -d -p 2222:22 -p 20-21:20-21 -p 21100-21110:21100-21110 -p 990:990 -v /Volumes/myDriver/Share:/home/ftpuser custom-ftp-server
 
     (or)
 
