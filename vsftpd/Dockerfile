@@ -1,7 +1,7 @@
 # Use the Alpine base image
 FROM alpine:latest
 
-LABEL Maintainer="Hariprasath Ravichandran" 
+LABEL Maintainer="Fedorov" 
 
 # Install vsftpd and other necessary packages
 RUN apk update && apk add --no-cache openssl vsftpd bash && rm -rf /var/cache/apk/*

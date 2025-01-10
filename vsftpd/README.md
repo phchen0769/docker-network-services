@@ -1,8 +1,8 @@
 # FTP Server in Docker based on Alpine Linux
 
-[![custom-ftp-server build](https://github.com/haravich/custom-ftp-server/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/haravich/custom-ftp-server/actions/workflows/docker-publish.yml) ![Docker pulls](https://img.shields.io/docker/pulls/haravich/custom-ftp-server)
+[![custom-ftp-server build](https://github.com/fedorov/custom-ftp-server/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/fedorov/custom-ftp-server/actions/workflows/docker-publish.yml) ![Docker pulls](https://img.shields.io/docker/pulls/fedorov/custom-ftp-server)
 
-This repository contains a Docker configuration to set up an FTP server using the Alpine Linux base image. The FTP server supports the following modes
+This repository contains a Docker configuration to fset up an FTP server using the Alpine Linux base image. The FTP server supports the following modes
 * FTP (Port 21)
 * FTPS (Port 21) AKA Explicit
 * FTPS Implicit (Port 990)
@@ -21,8 +21,8 @@ Before you begin, ensure you have the following installed:
    Clone this repository to your local machine:
 
    ```bash
-   git clone https://github.com/haravich/custom-ftp-server.git
-   cd custom-ftp-server
+   git clone https://github.com/phchen0769/docker-network-services.git
+   cd docker-network-services/vsftpd
    ```
 
 2. **Customize Configuration**:
@@ -38,7 +38,7 @@ Before you begin, ensure you have the following installed:
     Generate an SSL certificate and private key for FTPS if you plan to use secure connections. We do apply a default certficate if the environment variable `SSL_SUBJECT` not provided.
 
     ```bash
-    SSL_SUBJECT="/C=IN/O=haravich/CN=freeops.dev"
+    SSL_SUBJECT="/C=IN/O=fedorov/CN=freeops.dev"
     ```
 
     If you have your own certificate, you can provide it. The file should contain the full certificate chain starting from the leaf and ending with the CA certificate, followed by the private key in PEM format.
@@ -64,7 +64,7 @@ Before you begin, ensure you have the following installed:
 
     (or)
 
-    docker run -d -p 2222:22 -e FTP_MODE=ftps -e SSL_SUBJECT="/C=IN/O=haravich/CN=freeops.dev" -p 20-22:20-22 -p 21100-21110:21100-21110 -p 990:990 custom-ftp-server
+    docker run -d -p 2222:22 -e FTP_MODE=ftps -e SSL_SUBJECT="/C=IN/O=fedorov/CN=freeops.dev" -p 20-22:20-22 -p 21100-21110:21100-21110 -p 990:990 custom-ftp-server
     ```
 
     ### Environment Variables
@@ -81,7 +81,7 @@ Before you begin, ensure you have the following installed:
     | PASV_MAX_PORT | `21110` | (Port) `Any valid port` |
     | FTP_MODE | `ftp` | (string) `ftp`/`ftps`/`ftps_implicit`/`ftps_tls` |
     | LOG_STDOUT | `YES` | (bool) `YES`/`NO` |
-    | SSL_SUBJECT | - | (string) `/C=IN/O=haravich/CN=freeops.dev` |
+    | SSL_SUBJECT | - | (string) `/C=IN/O=fedorov/CN=freeops.dev` |
     | PEM_FILE | - | (string) `/tmp/tls/ftp.pem` |
 
 ## Access FTP Server:
