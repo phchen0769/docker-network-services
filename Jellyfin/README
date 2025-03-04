@@ -1,0 +1,12 @@
+docker run -d \
+  --name jellyfin \
+  --restart=always \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e TZ=Asia/Shanghai \
+  -p 8096:8096 \
+  -p 8920:8920 \
+  -v /mnt/sda/jellyfin/config:/config \
+  -v /mnt/sda/jellyfin/cache:/cache \
+  -v /mnt/sda/jellyfin/media:/media \
+  jellyfin/jellyfin:latest

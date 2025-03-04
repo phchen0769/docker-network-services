@@ -1,0 +1,35 @@
+# 下载samba镜像
+HTTP_PROXY="http://192.168.1.175:7890" HTTPS_PROXY="http://192.168.1.175:7890" docker pull dperson/samba
+
+# 运行
+docker run -d \
+  --name samba \
+  -p 137:137/udp \
+  -p 138:138/udp \
+  -p 139:139 \
+  -p 445:445 \
+  -v /mnt/sdb:/sdb \
+  dperson/samba \
+  -p \
+  -u "root;ABCabc123" \
+  -s "public;/sdb;yes;no;no"
+
+
+参数说明：
+
+    端口映射
+    -p 137:137/udp 与 -p 138:138/udp：NetBIOS UDP 端口
+    -p 139:139 与 -p 445:445：SMB 协议端口
+    
+    数据卷挂载
+    -v /path/to/your/share:/share：将宿主机目录挂载到容器内的 /share 目录
+dperson/samba 参数
+
+    -p：启用打印服务支持（如有需要）
+    -u "user;password"：添加 Samba 用户，格式为 用户名;密码，这里示例中用户名为 user，密码为 password
+    -s "public;/share;yes;no;no"：定义共享
+    第一个字段 public 为共享名称
+    第二个字段 /share 为容器内的共享目录
+    第三个字段 yes 表示该共享目录可写（writable）
+    第四个字段 no 表示该共享目录不允许匿名浏览（browsable）
+    第五个字段 no 表示不允许访客访问（guest access）
