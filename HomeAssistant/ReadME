@@ -1,6 +1,10 @@
+# 下载镜像
+docker pull homeassistant/home-assistant:latest
+
+# 运行
 docker run -d \
   --name="homeassistant" \
-  --restart=always \
-  -v /home/fedorov/config:/config \
+  --restart=unless-stopped \
+  -v /home/pi/config:/config \
   -p 8123:8123 \
   homeassistant/home-assistant:latest

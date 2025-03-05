@@ -1,0 +1,30 @@
+# 安装docker
+# 1.跟新系统
+sudo apt update && sudo apt upgrade -y
+
+# 2.设置全局代理
+export http_proxy="http://10.165.27.210:7890"
+export https_proxy="http://10.165.27.210:7890"
+
+# 3.安装docker
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+
+# 使用完成后，取消代理
+unset http_proxy https_proxy
+
+# 3.设置把用户添加到docker组
+sudo usermod -aG docker pi
+
+# 4.设置docker代理（由于docker不使用全局代理，只能单独设置）
+sudo mkdir -p /etc/systemd/system/docker.service.d
+sudo touch /etc/systemd/system/docker.service.d/http-proxy.conf
+# 添加如下内容：
+[Service]
+Environment="HTTP_PROXY=http://10.165.27.210:7890"
+Environment="HTTPS_PROXY=http://10.165.27.210:7890"
+Environment="NO_PROXY=localhost,127.0.0.1"
+
+# 5.重启docker
+sudo systemctl daemon-reload
+sudo systemctl restart docker

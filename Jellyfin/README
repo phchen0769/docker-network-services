@@ -1,6 +1,10 @@
+# 下载
+docker pull jellyfin/jellyfin:latest
+
+# 运行
 docker run -d \
   --name jellyfin \
-  --restart=always \
+  --restart=unless-stopped \
   -e PUID=1000 \
   -e PGID=1000 \
   -e TZ=Asia/Shanghai \

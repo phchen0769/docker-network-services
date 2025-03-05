@@ -1,9 +1,10 @@
 # 下载samba镜像
-HTTP_PROXY="http://192.168.1.175:7890" HTTPS_PROXY="http://192.168.1.175:7890" docker pull dperson/samba
+docker pull dperson/samba
 
 # 运行
 docker run -d \
   --name samba \
+  --restart=unless-stopped \
   -p 137:137/udp \
   -p 138:138/udp \
   -p 139:139 \
