@@ -28,3 +28,32 @@ Environment="NO_PROXY=localhost,127.0.0.1"
 # 5.重启docker
 sudo systemctl daemon-reload
 sudo systemctl restart docker
+
+
+# 设置静态地址
+# 1.查看网络连接
+sudo nmcli -p connection show
+# 2.修改连接
+sudo nmcli con mod "preconfigured" ipv4.addresses 192.168.1.100/24
+sudo nmcli con mod "preconfigured" ipv4.gateway 192.168.1.1
+sudo nmcli con mod "preconfigured" ipv4.method manual
+sudo nmcli con mod "preconfigured" ipv4.dns "8.8.8.8,114.114.114.114"
+# 3.重启连接
+sudo nmcli c down "preconfigured" && sudo nmcli c up "preconfigured"
+
+# 挂载硬盘
+# 1.查看硬盘UUID
+sudo blkid
+# /dev/sda1: LABEL="1T" UUID="9470-19F6" BLOCK_SIZE="512" TYPE="exfat" PARTUUID="2df27ae5-01"
+
+# 2.创建挂载点
+sudo mkdir -p /mnt/sda
+
+# 3.编辑配置文件
+sudo vim /etc/fstab
+# PARTUUID=2df27ae5-01 /mnt/sda exfat defaults 0 2
+# PARTUUID=88e988e9-01 /mnt/sdb exfat defaults 0 2
+# 挂载配置文件中所有的挂载点
+sudo mount -a 
+# 查看挂载情况
+df -h

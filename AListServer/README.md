@@ -4,8 +4,8 @@ docker pull xhofe/alist:v3.40.0-ffmpeg
 # 生成AList容器并运行
 docker run --name alist -d \
   --restart=unless-stopped \
-  -v /Volumes/myDriver/AListServer/data:/opt/alist/data \
-  -v /Volumes/myDriver/AListServer/root:/opt/alist/root \
+  -v /mnt/sda/alistServer/data:/opt/alist/data \
+  -v /mnt/sda/alistServer/root:/opt/alist/root \
   -p 5244:5244 \
   -e PUID=0 \
   -e PGID=0 \
