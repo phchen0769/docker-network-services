@@ -1,0 +1,17 @@
+# 后台运行docker容器
+docker compose up -d
+
+# 进入容器
+docker exec -it ollama /bin/bash
+
+# 下载并运行大模型
+ollama run llama3:8b-text
+
+# 查看本地大模型列表
+ollama list
+
+# 查看运行中的大模型
+ollama ps
+
+# 删除本地指定大模型
+ollama rm llama3:8b-text
