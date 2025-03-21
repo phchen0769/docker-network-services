@@ -1,0 +1,2 @@
+# 后台运行docker容器
+docker compose up -d
