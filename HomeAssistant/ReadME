@@ -3,8 +3,8 @@ docker pull homeassistant/home-assistant:latest
 
 # 运行
 docker run -d \
+  --network=host \
   --name="homeassistant" \
   --restart=unless-stopped \
   -v /home/pi/config:/config \
-  -p 8123:8123 \
   homeassistant/home-assistant:latest
