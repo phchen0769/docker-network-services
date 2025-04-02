@@ -10,10 +10,12 @@ docker run -d \
   -p 139:139 \
   -p 445:445 \
   -v /Volumes/myDriver/Films:/Films \
+  -v /Volumes/myDriver/Downloads:/Downloads \
   dperson/samba \
   -p \
-  -u "root;ABCabc123" \
-  -s "Films;/Films;yes;no;no"
+  -u "ftpuser;admin@123" \
+  -s "Films;/Films;yes;no;no" \
+  -s "Downloads;/Downloads;yes;no;no"
   
 
 参数说明：

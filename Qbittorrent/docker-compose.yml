@@ -12,5 +12,5 @@ services:
       - PGID=1000
       - TZ=Asia/Shanghai
     volumes:
-      - ~/qbittorrent/config:/config
-      - ~/qbittorrent/downloads:/downloads
+      - /Volumes/myDriver/qbittorrent/config:/config
+      - /Volumes/myDriver/qbittorrent/downloads:/downloads
