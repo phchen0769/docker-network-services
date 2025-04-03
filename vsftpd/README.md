@@ -3,6 +3,7 @@
 [![custom-ftp-server build](https://github.com/fedorov/custom-ftp-server/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/fedorov/custom-ftp-server/actions/workflows/docker-publish.yml) ![Docker pulls](https://img.shields.io/docker/pulls/fedorov/custom-ftp-server)
 
 This repository contains a Docker configuration to fset up an FTP server using the Alpine Linux base image. The FTP server supports the following modes
+
 * FTP (Port 21)
 * FTPS (Port 21) AKA Explicit
 * FTPS Implicit (Port 990)
@@ -12,7 +13,7 @@ This repository contains a Docker configuration to fset up an FTP server using t
 
 Before you begin, ensure you have the following installed:
 
-- Docker: Follow the official [Docker installation guide](https://docs.docker.com/get-docker/) to install Docker on your system.
+* Docker: Follow the official [Docker installation guide](https://docs.docker.com/get-docker/) to install Docker on your system.
 
 ## Getting Started
 
@@ -28,10 +29,10 @@ Before you begin, ensure you have the following installed:
 2. **Customize Configuration**:
 
     Configure FTP Server:
-    - Modify the `vsftpd-<FTP_MODE>.conf` file to customize the FTP server configuration. You can adjust settings such as user accounts, directory permissions, passive ports range, and security options.
+    * Modify the `vsftpd-<FTP_MODE>.conf` file to customize the FTP server configuration. You can adjust settings such as user accounts, directory permissions, passive ports range, and security options.
 
     Default:
-    - By default the `vsftpd.conf` is enabled with required configuration for specific modes.
+    * By default the `vsftpd.conf` is enabled with required configuration for specific modes.
 
 3. **Generate SSL Certificate:**
 
@@ -42,13 +43,17 @@ Before you begin, ensure you have the following installed:
     ```
 
     If you have your own certificate, you can provide it. The file should contain the full certificate chain starting from the leaf and ending with the CA certificate, followed by the private key in PEM format.
+
     ```bash
     ... -e FTP_PEM=/tmp/tls/ftp.pem -v /tmp/tls:/tmp/tls ...
     ```
+
     (or)
+
     ```bash
     ... -e FTP_PEM="<value_of_pem> | $(cat /tmp/tls/*.pem)" ...
     ```
+
 4. **Build and Run**:
 
     Build the Docker image and run the container:
@@ -68,13 +73,13 @@ Before you begin, ensure you have the following installed:
     docker run -d -p 2222:22 -e FTP_MODE=ftps -e SSL_SUBJECT="/C=IN/O=fedorov/CN=freeops.dev" -p 20-22:20-22 -p 21100-21110:21100-21110 -p 990:990 custom-ftp-server
     ```
 
-    ### Environment Variables
+   ### Environment Variables
 
     | Variable | Default Value | Available Options |
     |----------|----------|----------|
     | FTP_USER | `ftpuser` | (string) `name` |
     | FTP_PASSWORD | `admin` | (string) `password` |
-    | PASV_ENABLE | `YES` | (bool) `YES`/`NO` | 
+    | PASV_ENABLE | `YES` | (bool) `YES`/`NO` |
     | PASV_ADDRESS | - |  (Valid IP Address) `x.x.x.x` |
     | PASV_ADDRESS_INTERFACE | `eth0` | (Vlaid ETH interface) `xth1` |
     | PASV_ADDR_RESOLVE | `YES` | (bool) `YES`/`NO` |
@@ -85,21 +90,25 @@ Before you begin, ensure you have the following installed:
     | SSL_SUBJECT | - | (string) `/C=IN/O=fedorov/CN=freeops.dev` |
     | PEM_FILE | - | (string) `/tmp/tls/ftp.pem` |
 
-## Access FTP Server:
+## Access FTP Server
 
 Connect to the FTP server using an FTP client. Use the ftpuser username and the password. For secure FTPS connections, connect to port 21 and choose "FTP with TLS/SSL" or "FTPES" as the protocol.
 
 ```bash
 ftp -p 22 <ftp_user>@localhost
 ```
+
 Replace <ftp_user> with appropriate values.
 
 ## Customization
+
 * Adjust the FTP server settings in the vsftpd file.
 * Customize the run-vsftpd.sh script to modify for further configs.
 
 ## License
+
 This project is licensed under the [MIT License](LICENSE.md). See the [LICENSE.md](LICENSE.md) file for details.
+
 ```
 Copy and paste this Markdown content into a file named README.md in the root of your repository. Feel free to adjust the formatting and content as needed for your project.
 ```

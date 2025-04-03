@@ -8,7 +8,7 @@ RUN apk update && apk add --no-cache openssl vsftpd bash && rm -rf /var/cache/ap
 
 # Create an FTP user and set their password
 RUN adduser -D ftpuser
-RUN echo "ftpuser:admin" | chpasswd
+RUN echo "ftpuser:admin@123" | chpasswd
 
 RUN mkdir -p /home/vsftpd/
 RUN mkdir -p /var/log/vsftpd
