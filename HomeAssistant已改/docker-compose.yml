@@ -1,0 +1,8 @@
+services:
+  homeassistant:
+    image: homeassistant/home-assistant:latest
+    container_name: homeassistant
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - ${CONFIG_DIR}/homeassistant:/config
