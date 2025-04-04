@@ -1,17 +1,11 @@
 # 下载AList镜像
 docker pull xhofe/alist:v3.40.0-ffmpeg
 
-# 生成AList容器并运行
-docker run --name alist -d \
-  --restart=unless-stopped \
-  -v /mnt/sda/alistServer/data:/opt/alist/data \
-  -v /mnt/sda/alistServer/root:/opt/alist/root \
-  -p 5244:5244 \
-  -e PUID=0 \
-  -e PGID=0 \
-  -e UMASK=022 \
-  -e "TZ=Asia/Shanghai" \
-  xhofe/alist:v3.40.0-ffmpeg
+# 开发环境下运行
+docker compose --env-file=../dev.env up -d
+
+# 生产环境下运行
+docker compose --env-file=../pi.env up -d
 
 # 参数说明：
 /opt/alist/data 目录，用于存储alist程序本身的数据

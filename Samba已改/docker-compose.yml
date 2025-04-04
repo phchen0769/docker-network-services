@@ -1,0 +1,25 @@
+services:
+  samba:
+    image: dperson/samba
+    container_name: samba
+    restart: unless-stopped
+    ports:
+      - "137:137/udp"
+      - "138:138/udp"
+      - "139:139"
+      - "445:445"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=022
+      - TZ=${TIME_ZONE} 
+    volumes:
+      - ${FILM_DIR}:/Films
+      - ${DOWNLOAD_DIR}:/Downloads
+    command: 
+       [
+      "-p",
+      "-u", "${USERNAME};${PASSWORD}",
+      "-s", "Films;/Films;yes;no;no;${USERNAME}",
+      "-s", "Downloads;/Downloads;yes;no;no;${USERNAME}"
+    ]

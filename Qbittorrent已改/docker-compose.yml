@@ -2,7 +2,7 @@ services:
   qbittorrent:
     image: linuxserver/qbittorrent
     container_name: qbittorrent
-    restart: always
+    restart: unless-stopped
     ports:
       - "6881:6881"
       - "6881:6881/udp"
@@ -10,7 +10,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Asia/Shanghai
+      - TZ=${TIME_ZONE} 
     volumes:
-      - /Volumes/myDriver/qbittorrent/config:/config
-      - /Volumes/myDriver/qbittorrent/downloads:/downloads
+      - ${CONFIG_DIR}:/config
+      - ${DOWNLOAD_DIR}/qbittorrent:/downloads

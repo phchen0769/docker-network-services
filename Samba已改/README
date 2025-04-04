@@ -1,0 +1,34 @@
+# 下载samba镜像
+docker pull dperson/samba
+
+# 运行-挂在固定目录
+# 开发环境下运行
+docker compose --env-file=../dev.env up -d
+
+# 生产环境下运行
+docker compose --env-file=../pi.env up -d
+
+
+# 注意，此时的samba没有开机自动启动，因为它要读取USB设备，
+# 而USB设备在docker启动时可能还没有挂载，所以需要设置系统延迟启动
+# 1. 创建服务文件
+touch /etc/systemd/system/delayed-docker.service
+
+# 2. 编辑服务文件
+[Unit]
+Description=Delayed Docker Container
+After=docker.service
+Requires=docker.service
+
+[Service]
+Type=oneshot
+ExecStartPre=/bin/sleep 5
+ExecStart=/usr/bin/docker start samba
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
+
+# 3. 启动服务
+sudo systemctl enable delayed-docker.service
+sudo systemctl start delayed-docker.service
