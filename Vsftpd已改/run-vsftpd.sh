@@ -2,7 +2,7 @@
 
 # Fetch password, and public key from environment variables
 FTP_USER="${FTP_USER:-ftpuser}"
-FTP_PASSWORD="${FTP_PASSWORD:-admin}"
+FTP_PASSWORD="${FTP_PASS:-admin@123}"
 PASV_ENABLE="${PASV_ENABLE:-YES}"
 PASV_ADDRESS="${PASV_ADDRESS:-}"
 PASV_ADDRESS_INTERFACE="${PASV_ADDRESS_INTERFACE:-eth0}"

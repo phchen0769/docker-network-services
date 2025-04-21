@@ -1,0 +1,9 @@
+services:
+  kali:
+    image: kalilinux/kali-rolling
+    container_name: kali
+    network_mode: host
+    volumes:
+      - ${KALI_DATA}:/root
+    stdin_open: true
+    tty: true

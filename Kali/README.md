@@ -11,7 +11,8 @@ docker build -t kali-custom .             # 构建包含 nmap、metasploit 等�
 ## 运行
 
 ```bash
-docker run --network=host -it -p 80:80 -v ~/kali_data:/root --name kali kalilinux/kali-rolling
+# 开发环境下运行
+docker compose --env-file=../dev.env up -d
 ```
 
 ## 安装配置源

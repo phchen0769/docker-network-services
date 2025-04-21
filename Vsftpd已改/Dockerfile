@@ -6,9 +6,13 @@ LABEL Maintainer="Fedorov"
 # Install vsftpd and other necessary packages
 RUN apk update && apk add --no-cache openssl vsftpd bash && rm -rf /var/cache/apk/*
 
+
+ARG FTP_USER
+ARG FTP_PASS
+
 # Create an FTP user and set their password
-RUN adduser -D ftpuser
-RUN echo "ftpuser:admin@123" | chpasswd
+RUN adduser -D $FTP_USER
+RUN echo "$FTP_USER:$FTP_PASS" | chpasswd
 
 RUN mkdir -p /home/vsftpd/
 RUN mkdir -p /var/log/vsftpd

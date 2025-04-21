@@ -1,8 +1,8 @@
 # 开发环境下运行
+
 docker compose --env-file=../dev.env up -d
 
-
-# FTP Server in Docker based on Alpine Linux
+## FTP Server in Docker based on Alpine Linux
 
 [![custom-ftp-server build](https://github.com/fedorov/custom-ftp-server/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/fedorov/custom-ftp-server/actions/workflows/docker-publish.yml) ![Docker pulls](https://img.shields.io/docker/pulls/fedorov/custom-ftp-server)
 

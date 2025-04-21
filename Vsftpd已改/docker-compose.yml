@@ -3,6 +3,9 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile
+      args:
+        FTP_USER: ${USERNAME}
+        FTP_PASS: ${PASSWORD}
     image: ftp-img:latest
     container_name: ftp
     restart: unless-stopped
@@ -12,7 +15,7 @@ services:
       - "21100-21110:21100-21110"
       - "990:990"
     volumes:
-      - ${SHARE_DIR}:/home/${FTP_USER}
+      - ${SHARE_DIR}:/home/vsftpd
     environment:
-      - FTP_USER=${USERNAME} 
-      - FTP_PASS=${PASSWORD}
+      FTP_USER: ${USERNAME}
+      FTP_PASS: ${PASSWORD}
