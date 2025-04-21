@@ -1,0 +1,11 @@
+services:
+  xunlei:
+    image: cnk3x/xunlei:latest
+    container_name: xunlei
+    restart: unless-stopped
+    ports:
+      - "2345:2345"
+    volumes:
+      - ${CONFIG_DIR}/xunlei/config:/xunlei/data
+      - ${DOWNLOAD_DIR}:/xunlei/downloads
+    privileged: true

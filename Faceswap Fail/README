@@ -1,5 +1,7 @@
 # 构建镜像 fail
+
 docker build -t faceswap-cpu .
- 
+
 # 启动并进入容器
+
 docker run --rm -it faceswap-cpu

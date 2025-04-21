@@ -6,15 +6,10 @@
 docker pull cnk3x/xunlei:latest
 ```
 
-## setting and running
+## 开发环境下运行
 
-```bash
-docker run -d \
-  --name=xunlei \
-  -p 2345:2345 \
-  -v /Volumes/myDriver/xunlei/config:/xunlei/data \
-  -v /Volumes/myDriver/xunlei/downloads/:/xunlei/downloads \
-  --restart=unless-stopped \
-  --privileged \
-  cnk3x/xunlei:latest
-```
+docker compose --env-file=../dev.env up -d
+
+## 生产环境下运行
+
+docker compose --env-file=../pi.env up -d
