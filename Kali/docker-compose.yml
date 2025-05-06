@@ -1,7 +1,14 @@
 services:
   kali:
-    image: kalilinux/kali-rolling
+    image: kali-pentest:1.0.0
+    build:
+      context: ./Kali-Linux-Dockerfile
+      dockerfile: Dockerfile
     container_name: kali
+    cap_add:
+      - NET_RAW
+      - NET_ADMIN
+    user: root
     network_mode: host
     volumes:
       - ${KALI_DATA}:/root

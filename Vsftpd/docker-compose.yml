@@ -15,7 +15,7 @@ services:
       - "21100-21110:21100-21110"
       - "990:990"
     volumes:
-      - ${SHARE_DIR}:/home/vsftpd
+      - ${FTP_DIR}:/home/ftpuser
     environment:
       FTP_USER: ${USERNAME}
       FTP_PASS: ${PASSWORD}
