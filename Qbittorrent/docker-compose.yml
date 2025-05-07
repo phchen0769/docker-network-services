@@ -13,4 +13,4 @@ services:
       - TZ=${TIME_ZONE} 
     volumes:
       - ${CONFIG_DIR}:/config
-      - ${DOWNLOAD_DIR}/qbittorrent:/downloads
+      - ${DOWNLOAD_DIR}/Qbittorrent:/downloads
