@@ -20,6 +20,6 @@ services:
        [
       "-p",
       "-u", "${USERNAME};${PASSWORD}",
-      "-s", "Films;/Films;yes;no;no;${USERNAME}",
-      "-s", "Downloads;/Downloads;yes;no;no;${USERNAME}"
+      "-s", "Films;/Films;no;no;no;${USERNAME}",
+      "-s", "Downloads;/Downloads;no;no;no;${USERNAME}"
     ]
