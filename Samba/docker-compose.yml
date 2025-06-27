@@ -9,17 +9,15 @@ services:
       - "139:139"
       - "445:445"
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=1001
+      - PGID=1001
       - UMASK=022
       - TZ=${TIME_ZONE} 
     volumes:
       - ${FILM_DIR}:/Films
-      - ${DOWNLOAD_DIR}:/Downloads
     command: 
        [
       "-p",
       "-u", "${USERNAME};${PASSWORD}",
-      "-s", "Films;/Films;no;no;no;${USERNAME}",
-      "-s", "Downloads;/Downloads;no;no;no;${USERNAME}"
+      "-s", "Films;/Films;yes;no;no;${USERNAME}",
     ]
