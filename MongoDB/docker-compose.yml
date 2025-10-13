@@ -1,0 +1,14 @@
+services:
+  postgres:
+    container_name: MongoDB
+    image: mongodb/mongodb-community-server:latest
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${PASSWORD}
+      # - MONGO_INITDB_DATABASE=${MONGODB_NAME}
+
+    volumes:
+      - ${MONGODB_DATA}:/data/db
+    restart: unless-stopped

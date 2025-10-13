@@ -1,0 +1,2 @@
+# 开发环境下运行
+docker compose --env-file=../dev.env up -d
