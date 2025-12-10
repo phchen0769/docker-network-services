@@ -1,0 +1,39 @@
+services:
+  dev-container:
+    image: alpine:latest
+    container_name: dev-container
+    restart: unless-stopped
+    ports:
+      - "2222:22"
+    volumes:
+      - ${GITHUB_DIR}:/Github
+    command: >
+      sh -c "
+        # 安装软件
+        apk update && apk add --no-cache openssh-server openssh-client bash sudo shadow &&
+        
+        # 设置root密码
+        echo 'root:$${ROOT_PASSWORD}' | chpasswd &&
+        
+        # 创建普通用户
+        adduser -D -s /bin/bash $${USERNAME} &&
+        echo '$${USERNAME}:$${USER_PASSWORD}' | chpasswd &&
+        adduser $${USERNAME} wheel &&
+        
+        # 配置sudo
+        echo '%wheel ALL=(ALL) ALL' >> /etc/sudoers &&
+        
+        # 配置SSH
+        ssh-keygen -A &&
+        sed -i 's/#PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config &&
+        sed -i 's/#PasswordAuthentication.*/PasswordAuthentication yes/' /etc/ssh/sshd_config &&
+        
+        # 创建用户SSH目录
+        mkdir -p /home/$${USERNAME}/.ssh &&
+        chmod 700 /home/$${USERNAME}/.ssh &&
+        chown -R $${USERNAME}:$${USERNAME} /home/$${USERNAME}/.ssh &&
+        
+        # 启动服务
+        /usr/sbin/sshd -D -e
+      "
+    

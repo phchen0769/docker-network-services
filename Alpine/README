@@ -1,0 +1,8 @@
+# 构建镜像
+docker build -t my-alpine-ssh .
+
+# 运行容器
+docker run -d --name alpine-ssh -p 2222:22 my-alpine-ssh
+
+# 开发环境下运行
+docker compose --env-file=../dev.env up -d
