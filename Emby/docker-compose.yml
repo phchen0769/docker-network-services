@@ -1,0 +1,37 @@
+services:
+  emby:
+    image: emby/embyserver:latest  # 使用官方镜像，也可指定特定版本如 `emby/embyserver:4.8.8.0`
+    container_name: emby           # 容器名称，便于管理
+    restart: unless-stopped        # 设置自动重启策略（除非手动停止）
+    network_mode: bridge           # 网络模式，默认可不写，特殊需求可改为host
+    environment:
+      - TZ=Asia/Shanghai           # 【重要】设置容器时区，与宿主机一致可避免时间问题
+      - UID=1000                   # 【建议】设置运行容器的用户ID，与宿主机媒体文件所有者一致
+      - GID=1000                   # 【建议】设置用户组ID，同上
+    ports:
+      - "8096:8096"                # Web管理界面端口（HTTP）
+      - "8920:8920"                # HTTPS端口（若启用）
+      # - "7359:7359/udp"          # 客户端自动发现端口（可选）
+      # - "1900:1900/udp"          # DLNA端口（可选）
+    volumes:
+      # 核心配置目录，必须持久化
+      - /${CONFIG_DIR}/emby/config:/config
+      # 可选：挂载临时转码目录，可改善性能
+      - /${CONFIG_DIR}/emby/cache:/cache
+      # 媒体库目录，可按需添加多个，注意权限
+      # - /your/local/movies:/data/movies
+      # - /your/local/tvshows:/data/tvshows
+      # - /your/local/music:/data/music
+      
+    # devices:
+      # 【重要】如需硬件解码，请取消对应注释并确保路径存在
+      # - /dev/dri/renderD128:/dev/dri/renderD128  # Intel核显 (QSV) 常用设备
+      # - /dev/dri:/dev/dri                        # Intel核显 (QSV) 另一写法
+      # - /dev/nvidia0:/dev/nvidia0                # NVIDIA独立显卡
+      # - /dev/nvidiactl:/dev/nvidiactl
+      # - /dev/nvidia-uvm:/dev/nvidia-uvm
+      # - /dev/vchiq:/dev/vchiq                    # 树莓派
+    privileged: false              # 一般情况下无需特权模式
+    # user: "1000:1000"            # 另一种用户指定方式，若使用则无需上面UID/GID变量
+    # mem_limit: 4g                  # 可选：限制容器最大内存使用
+    # cpus: '2.0'                    # 可选：限制容器CPU使用核数
