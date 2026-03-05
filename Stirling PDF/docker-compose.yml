@@ -1,0 +1,15 @@
+services:
+  stirling-pdf:
+    image: frooodle/s-pdf:latest
+    container_name: stirling-pdf
+    restart: unless-stopped  # 开机自启，异常重启
+    ports:
+      - "8080:8080"  # 宿主端口:容器端口，可改为 80:8080
+    volumes:
+      - ${CONFIG_DIR}:/data # 持久化配置、OCR 缓存
+      - ${TESSDATA_DIR}:/usr/share/tessdata  # 挂载 OCR 语言包（可选）
+
+    environment:
+      - DOCKER_ENABLE_SECURITY=false  # 本地访问关闭安全校验
+      - DEFAULT_LOCALE=zh_CN  # 强制中文
+      - UI_ENABLED=true  # 启用 Web UI
