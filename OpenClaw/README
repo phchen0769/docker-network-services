@@ -1,0 +1,4 @@
+git clone https://github.com/openclaw/openclaw.git
+cd openclaw
+# 参考仓库内 docker-compose.yml 与文档
+docker-compose up -d
